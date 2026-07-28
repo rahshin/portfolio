@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rahul Shinde - Engineering Leader & Systems Architect</title>
+  <meta name="description" content="Engineering Leader with deep experience building trustworthy distributed systems, privacy-preserving data platforms, and AI-assisted engineering workflows." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="./index.html" class="brand-logo" aria-label="Rahul Shinde Home">
+        <img src="./images/profile-pic.jpg" alt="Rahul Shinde" class="brand-avatar" />
+        <span>Rahul Shinde</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="./index.html" class="nav-link active">Home</a></li>
+          <li><a href="./about.html" class="nav-link">About</a></li>
+          <li><a href="./experience.html" class="nav-link">Experience</a></li>
+          <li><a href="./engineering/index.html" class="nav-link">Engineering</a></li>
+          <li><a href="./privacy.html" class="nav-link">Privacy</a></li>
+          <li><a href="./ai-engineering.html" class="nav-link">AI Eng</a></li>
+          <li><a href="./ai-safety.html" class="nav-link">AI Safety</a></li>
+          <li><a href="./projects.html" class="nav-link">Projects</a></li>
+          <li><a href="./writing.html" class="nav-link">Writing</a></li>
+          <li><a href="./contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="social-nav">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          </a>
+          <a href="https://github.com/rahulshin" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Mobile Toggle -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span>Menu</span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="./index.html" class="active">Home</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./experience.html">Experience</a></li>
+        <li><a href="./engineering/index.html">Engineering</a></li>
+        <li><a href="./privacy.html">Privacy Engineering</a></li>
+        <li><a href="./ai-engineering.html">AI Engineering</a></li>
+        <li><a href="./ai-safety.html">AI Safety & Security</a></li>
+        <li><a href="./projects.html">Projects</a></li>
+        <li><a href="./writing.html">Writing</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span class="status-dot"></span>
+              B.Tech Computer Science, IIT Kanpur
+            </div>
+            
+            <h1 class="hero-title">Trustworthy Distributed Systems, Privacy Platforms & AI Engineering</h1>
+            
+            <p class="hero-subtitle">
+              Hi, I'm <strong>Rahul Shinde</strong>. An engineering leader with 20+ years of experience building high-throughput data processing ecosystems, privacy-by-design architectures, and production AI-assisted software workflows.
+            </p>
+
+            <div class="hero-actions">
+              <a href="./experience.html" class="btn btn-primary">
+                View Architectural Case Studies →
+              </a>
+              <a href="./docs/RahulShinde-Resume.pdf" class="btn btn-secondary" target="_blank">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Download Resume
+              </a>
+            </div>
+          </div>
+
+          <div class="profile-card">
+            <img src="./images/profile-pic.jpg" alt="Rahul Shinde Profile" class="profile-photo" />
+          </div>
+        </div>
+
+        <!-- Highlight Metrics Bar -->
+        <div class="stats-bar">
+          <div class="stat-item">
+            <div class="stat-number">60x</div>
+            <div class="stat-label">DSR Processor Speedup</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">1TB+</div>
+            <div class="stat-label">Daily Data Discovery</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">1,200+</div>
+            <div class="stat-label">Enterprise Clients Served</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">US Patent</div>
+            <div class="stat-label">Native PII Discovery & Indexing</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Areas of Expertise -->
+    <section class="section section-subtle">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Core Engineering Pillars</h2>
+          <p class="section-subtitle">Combining deep systems architecture with data governance, security, and developer acceleration.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-header">
+              <span class="tag">Infrastructure</span>
+            </div>
+            <h3 class="card-title"><a href="./engineering/index.html">Trustworthy Distributed Systems</a></h3>
+            <p class="card-body">
+              Architecting microservices, Kubernetes clusters (GKE/EKS/AKS), Kafka event streams, Flink pipelines, and high-concurrency data ecosystems handling 1B+ records.
+            </p>
+            <div class="card-footer">
+              <div class="tag-group">
+                <span class="tag">Java</span>
+                <span class="tag">Python</span>
+                <span class="tag">Kafka</span>
+                <span class="tag">Kubernetes</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="tag">Privacy</span>
+            </div>
+            <h3 class="card-title"><a href="./privacy.html">Privacy Engineering</a></h3>
+            <p class="card-body">
+              Embedding Privacy by Design into data schemas, PII/PHI detection, HIPAA audit trails, GDPR/CCPA compliance, and cryptographic data shredding.
+            </p>
+            <div class="card-footer">
+              <div class="tag-group">
+                <span class="tag">Zero-Trust</span>
+                <span class="tag">GDPR</span>
+                <span class="tag">HIPAA</span>
+                <span class="tag">Tokenization</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="tag">AI & Workflow</span>
+            </div>
+            <h3 class="card-title"><a href="./ai-engineering.html">AI-Assisted Engineering</a></h3>
+            <p class="card-body">
+              Integrating Claude Code, the BMAD methodology, and Ollama LLM APIs into engineering pipelines while maintaining test-driven engineering rigor.
+            </p>
+            <div class="card-footer">
+              <div class="tag-group">
+                <span class="tag">Claude Code</span>
+                <span class="tag">BMAD</span>
+                <span class="tag">Ollama</span>
+                <span class="tag">Agents</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Table Section -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Selected Architectural Achievements</h2>
+          <p class="section-subtitle">Measurable production results backed by verifiable engineering implementations.</p>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Achievement</th>
+                <th>Technical Context</th>
+                <th>Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>60x DSR Speedup</strong></td>
+                <td>Re-architected Data Subject Request processor at RelyanceAI using Python microservices</td>
+                <td>Reduced execution latency from 10 req/min to 10 req/sec</td>
+              </tr>
+              <tr>
+                <td><strong>1TB/day Data Pipeline</strong></td>
+                <td>Engineered OneTrust Data Discovery platform on a 20 vCPU, 80GB cluster</td>
+                <td>Processed 1B+ rows across 40+ heterogeneous data sources</td>
+              </tr>
+              <tr>
+                <td><strong>Patented PII Discovery</strong></td>
+                <td>Co-invented US Patent WO2022159901A1 for native data classification & indexing</td>
+                <td>Automated enterprise-scale GDPR & CCPA discovery for Native compute on systems like Hadoop, Databricks, etc</td>
+              </tr>
+              <tr>
+                <td><strong>Weekly Release Cadence</strong></td>
+                <td>Operational transformation of engineering release pipelines over 3 months</td>
+                <td>Boosted on-time feature delivery to 90% while maintaining high morale</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-text">
+        © 2026 Rahul Shinde. Built with pure HTML5 & CSS3. Hosted on GitHub Pages.
+      </div>
+      <div>
+        <a href="#top" class="back-to-top">↑ Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('is-active');
+      });
+    }
+  </script>
+</body>
+</html>
