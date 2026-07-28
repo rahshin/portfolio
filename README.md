@@ -29,7 +29,7 @@ portfolio/
 │   └── hero-placeholder.svg      <!-- Banner graphics placeholder -->
 │
 └── docs/                    # Documents folder for supporting files
-    └── Rahul_Shinde_Resume.pdf         <--- Your resume PDF should go here
+    └── RahulShinde-Resume.pdf         <--- Your resume PDF should go here
 
 ```
 
