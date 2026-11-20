@@ -57,9 +57,9 @@ Zero dependencies means zero updates to worry about. The CSS uses custom propert
 
 ## Deployment Instructions
 
-1. Push changes to GitHub repository at: `https://github.com/rahulshin/portfolio`  
-2. Enable GitHub Pages in Settings > Pages with source set to main branch and root folder
-3. Your site will be live at `https://rahshin.github.io/portfolio/` within 1-5 minutes
+1. Push the site files to the `main` branch of [rahshin/portfolio](https://github.com/rahshin/portfolio).
+2. In **Settings → Pages**, use **Deploy from a branch**, select `main` and `/(root)`, and save.
+3. After the Pages deployment finishes, open [the portfolio](https://rahshin.github.io/portfolio/index.html).
 
 ## Customization Guide
 

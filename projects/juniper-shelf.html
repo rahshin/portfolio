@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How I built a local catalog editor for Juniper Shelf | Rahul Shinde</title>
+  <meta name="description" content="A catalog case study on local content editing, repository-backed photos, and static deployment through GitHub and Cloudflare Pages." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="../index.html" class="brand-logo" aria-label="Rahul Shinde Home">
+        <img src="../images/profile-pic.jpg" alt="Rahul Shinde" class="brand-avatar" />
+        <span>Rahul Shinde</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="../about.html" class="nav-link">About</a></li>
+          <li><a href="../experience.html" class="nav-link">Experience</a></li>
+          <li><a href="../engineering/index.html" class="nav-link">Engineering</a></li>
+          <li><a href="../privacy.html" class="nav-link">Privacy</a></li>
+          <li><a href="../ai-engineering.html" class="nav-link">AI Eng</a></li>
+          <li><a href="../ai-safety.html" class="nav-link">AI Safety</a></li>
+          <li><a href="../projects.html" class="nav-link active">Projects</a></li>
+          <li><a href="../writing.html" class="nav-link">Writing</a></li>
+          <li><a href="../contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="social-nav">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          </a>
+          <a href="https://github.com/rahshin" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          </a>
+        </div>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span>Menu</span>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../engineering/index.html">Engineering</a></li>
+        <li><a href="../privacy.html">Privacy Engineering</a></li>
+        <li><a href="../ai-engineering.html">AI Engineering</a></li>
+        <li><a href="../ai-safety.html">AI Safety & Security</a></li>
+        <li><a href="../projects.html" class="active">Projects</a></li>
+        <li><a href="../writing.html">Writing</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="top">
+    <article class="article-container catalog-article">
+      <header class="article-header">
+        <a href="../projects.html" class="back-link">Back to Projects</a>
+        <h1 class="article-title">How I built a local catalog editor for Juniper Shelf</h1>
+        <p>How I used a local content editor, GitHub, and Cloudflare Pages to publish a small catalog.</p>
+        <p class="article-meta">By Rahul Shinde · Project case study</p>
+      </header>
+      <div class="article-body">
+        <p>Juniper Shelf is a fictional name for a catalog I built for a small business. The public site is a React single-page application. Visitors can browse products and view their photos without the site running an application server or database. The shop still needed a way to add photos and change descriptions without editing JSON by hand. I built a visual editor for that work and kept the content files in Git alongside the storefront.</p>
+        <h2>How product photos reach the browser</h2>
+        <p>The catalog lives in <code>public/products.json</code>. Each product can reference several images by URL and include alternative text. The listing uses the first photo, and the product page lets visitors select from the gallery.</p>
+        <p>When an editor adds a photo, the admin page converts HEIC or HEIF uploads to JPEG in the browser. The local Express server saves the uploaded file under <code>public/images/uploads/</code> with a generated filename and returns its URL. Saving the product records that URL in the catalog JSON. The JSON contains references to image files, so browsing the catalog doesn’t require downloading the photo data with the product list.</p>
+        <p>Vite copies the files in <code>public/</code> into the production build. Cloudflare Pages serves those files alongside the application bundle. The browser loads the catalog JSON and requests each image as a separate static asset. An uploaded photo is served from the site’s own asset path, without a live image API or a connection to the editor’s computer.</p>
+        <figure>
+          <img src="../images/juniper-shelf/collections.jpg" alt="Juniper Shelf catalog with a vase, linen throw, and brass tray" width="1452" height="856" loading="lazy" decoding="async" />
+          <figcaption>The storefront loads product photos as separate static files. The sample products are fictional, and their photos were generated for this demo.</figcaption>
+        </figure>
+
+        <h2>How the admin editor works</h2>
+        <p>The editor is a React view that I run on a local machine with the project checked out. The local Node.js and Express process serves the development app and handles catalog writes and uploads. The editor has a login screen, a product form, photo upload and ordering controls, and CSV import and export for bulk editing.</p>
+        <figure>
+          <img src="../images/juniper-shelf/dashboard.jpg" alt="Local Juniper Shelf CMS listing products and showing CSV controls" width="1165" height="485" loading="lazy" decoding="async" />
+          <figcaption>The local dashboard gives the editor a place to review the catalog and open a product for editing.</figcaption>
+        </figure>
+
+        <p>When I open the catalog locally, the frontend can read from the Express API so I can review edits in the browser. The deployed SPA falls back to the bundled <code>products.json</code> and loads the photos through their static URLs. The public deployment contains the generated site files. It doesn’t run the local Express write API. The boundary is the deployment itself. A login screen or a hidden admin link wouldn’t make a public write API private.</p>
+        <figure>
+          <img src="../images/juniper-shelf/editor.jpg" alt="Product editor with a description, image path, and upload button" width="775" height="788" loading="lazy" decoding="async" />
+          <figcaption>The product editor keeps the description and image references together before saving them to the local checkout.</figcaption>
+        </figure>
+
+        <h2>From a local edit to the live site</h2>
+        <ol>
+        <li><strong>Edit locally.</strong> Open the admin editor and change the description, update product fields, or add and reorder photos. Saving a product updates the JSON in the working copy. Uploaded photos are files in the same checkout.</li>
+        <li><strong>Preview the catalog.</strong> Check the listing and detail view. Confirm that the right photo appears first and every image referenced by the JSON loads.</li>
+        <li><strong>Commit the content.</strong> Review the Git diff and commit the JSON and any new or replaced images together. Push the changes to the connected GitHub repository. A local save is still private to the working copy until the files are published.</li>
+        <li><strong>Deploy from GitHub.</strong> When the change reaches the production branch, Cloudflare Pages runs <code>npm run build</code> and serves the resulting <code>dist/</code> directory. The catalog data, photos, and frontend ship as one deployment. A preview branch can provide a separate site to review before merging. <a href="https://developers.cloudflare.com/pages/get-started/git-integration/">Cloudflare Pages Git integration</a></li>
+        <li><strong>Check the live page.</strong> Open the published listing and product page and verify the updated text and photos. If a photo is missing, check that its path appears in the JSON and that the corresponding file was included in the same commit.</li>
+        </ol>
+        <h2>What I gained and what it costs</h2>
+        <p>Keeping content in Git gives me a record of what shipped and lets me review a change to a product and its images together. It also keeps the public setup small. Cloudflare serves a build output, and the editor and its write API run only where I do the editing.</p>
+        <h3>Where this setup falls short</h3>
+        <ul>
+        <li><strong>Changes wait for a deploy.</strong> Saving in the local editor updates the checkout. Customers see the change only after the files are pushed and Cloudflare finishes a successful build. That delay is acceptable for occasional catalog changes. It becomes a problem if prices or stock need to update immediately.</li>
+        <li><strong>Editors can overwrite each other’s changes.</strong> Each editor needs a local checkout and a way to publish through Git. If two people update the same product from separate checkouts, they have to reconcile the JSON changes before publishing. The editor has no shared draft or review queue.</li>
+        <li><strong>Photos add weight to Git and to the page.</strong> The project stores uploaded files in the repository, so replacing photos can grow its history over time. The storefront serves the uploaded files as static assets. Large uploads can still slow down the gallery on a mobile connection.</li>
+        <li><strong>The catalog shows the last published snapshot.</strong> Product availability comes from the catalog JSON. The site has no live inventory feed, checkout, or reservation system to update that status when someone buys a product.</li>
+        <li><strong>Static files are public.</strong> A product hidden in the storefront can still be present in the published JSON, and a direct photo URL can still work. I have to leave confidential drafts and images out of the build entirely.</li>
+        </ul>
+        <p>I’d keep this setup for a small catalog with one editor and occasional updates. If several people needed to publish independently, I’d look at a managed CMS. If the image library became hard to manage in Git, I’d move photos to object storage.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-text">
+        © 2026 Rahul Shinde.
+      </div>
+      <div>
+        <a href="#top" class="back-to-top">↑ Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('is-active');
+      });
+    }
+  </script>
+</body>
+</html>

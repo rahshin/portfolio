@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How I designed the Time And Date release pipeline | Rahul Shinde</title>
+  <meta name="description" content="How I pinned the source commit, verified the QA bundle, and promoted those same files to production." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="../index.html" class="brand-logo" aria-label="Rahul Shinde Home">
+        <img src="../images/profile-pic.jpg" alt="Rahul Shinde" class="brand-avatar" />
+        <span>Rahul Shinde</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="../about.html" class="nav-link">About</a></li>
+          <li><a href="../experience.html" class="nav-link">Experience</a></li>
+          <li><a href="./index.html" class="nav-link active">Engineering</a></li>
+          <li><a href="../privacy.html" class="nav-link">Privacy</a></li>
+          <li><a href="../ai-engineering.html" class="nav-link">AI Eng</a></li>
+          <li><a href="../ai-safety.html" class="nav-link">AI Safety</a></li>
+          <li><a href="../projects.html" class="nav-link">Projects</a></li>
+          <li><a href="../writing.html" class="nav-link">Writing</a></li>
+          <li><a href="../contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="social-nav">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          </a>
+          <a href="https://github.com/rahshin" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          </a>
+        </div>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span>Menu</span>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="./index.html" class="active">Engineering</a></li>
+        <li><a href="../privacy.html">Privacy Engineering</a></li>
+        <li><a href="../ai-engineering.html">AI Engineering</a></li>
+        <li><a href="../ai-safety.html">AI Safety & Security</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../writing.html">Writing</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="top">
+    <article class="article-container timeandate-article">
+      <header class="article-header">
+        <a href="./index.html" class="back-link">Back to Engineering Hub</a>
+        <h1 class="article-title">How I designed the Time And Date release pipeline</h1>
+        <p class="article-deck">A GitHub Actions and Cloudflare case study in building once and deploying the bundle QA tested.</p>
+        <p class="article-meta">By Rahul Shinde · Time And Date · CI/CD design</p>
+      </header>
+
+      <div class="article-body">
+        <p>Time And Date is a small app, but I wanted a production release to be traceable. If I saw something unexpected on the live site, I wanted to be able to work backward from the deployed files to a candidate and then to the commit that built it.</p>
+        <p>World Clocks and Timer both run from static web files, so I could keep the infrastructure small. The release pipeline still had to answer the questions I’d expect on a team: which commit passed CI, which bundle QA tested, and which build is live? <a href="https://github.com/rahshin/timeandate">Time And Date on GitHub</a></p>
+        <h2>The architecture in one view</h2>
+        <p><strong>Pull request → CI checks → merge → CI on the merged commit</strong></p>
+        <p><strong>Verified commit → build and package → Cloudflare QA → GitHub prerelease</strong></p>
+        <p><strong>Selected prerelease → production approval → deploy the same bundle → verify live → GitHub stable release</strong></p>
+        <p>A merge can happen as soon as the change is ready. A production deploy can wait until someone has tested and approved a specific bundle.</p>
+        <h2>CI on the commit that will ship</h2>
+        <p>GitHub Actions runs CI on pull requests and on pushes to <code>main</code> and release branches. It lints the workflow files, installs dependencies from the lockfile, runs the tests, and builds the app. PR checks run with read-only repository access and without Cloudflare deployment credentials. That makes them appropriate for contributions to a public repository.</p>
+        <p>I chose to verify the actual release SHA against a successful <strong>push</strong> CI run. The commit that lands after a merge can differ from the revision that passed PR checks. The release planner verifies the SHA it will build, and it requires that the commit be reachable from <code>main</code> or a maintained release branch. Branch rules can make the CI check a merge requirement. The release check then applies that same standard to the exact source selected for deployment. <a href="https://github.com/rahshin/timeandate/blob/main/.github/workflows/ci.yml">CI workflow</a></p>
+        <h2>What goes into the release bundle</h2>
+        <p>The release workflow runs from <code>main</code>. Its source can come from <code>main</code> or a release branch. That separation lets me use the current release workflow to build a specific, older maintenance commit when needed.</p>
+        <p>For a routine candidate I leave the source SHA and tag blank. The workflow pins the <code>main</code> commit at dispatch and uses that commit’s <code>package.json</code> version to choose the next RC tag. For example, version <code>0.2.0</code> starts at <code>v0.2.0-rc.1</code>. When I need a particular release branch commit, I can supply its full SHA. I can also specify a candidate tag explicitly.</p>
+        <p>The build produces a static bundle and two forms of evidence:</p>
+        <ul>
+        <li><strong>A SHA-256 checksum</strong> lets the workflow verify that the archived bundle’s bytes match the expected digest.</li>
+        <li><strong>A build manifest</strong> inside the bundle records the source SHA and candidate tag. Once the site is deployed, <code>/build-info.json</code> lets me compare the live build with the one I meant to deploy.</li>
+        </ul>
+        <p>After automated QA succeeds, GitHub publishes the candidate as a prerelease with the archive and checksum. Production can retrieve that bundle later without relying on the original job’s temporary artifact. I treat a published tag and its bundle as fixed. If the source changes, I cut a new candidate. The checksum provides integrity checking, and control over tag and release writes determines who can publish a trusted bundle. <a href="https://github.com/rahshin/timeandate/blob/main/.github/workflows/release.yml">Release workflow</a></p>
+        <h2>Cloudflare deployment and QA</h2>
+        <p>The Wrangler configuration defines two Workers with Static Assets, one for QA and one for production. GitHub Actions deploys through Wrangler, using a token held in the appropriate GitHub environment. The repository keeps the Worker configuration separate from the deployment credentials. Each environment also has a public HTTPS URL for verification. <a href="https://developers.cloudflare.com/workers/static-assets/get-started/">Cloudflare Workers Static Assets</a> · <a href="https://github.com/rahshin/timeandate/blob/main/docs/setup.md">Project setup</a></p>
+        <p>After Wrangler finishes, the smoke test calls the public QA URL. It checks the candidate tag and SHA in the live manifest and verifies that direct links to World Clocks and Timer return the app shell.</p>
+        <p>A browser check covers what those requests miss. For example, with World Clocks, I can open a shared board in a fresh browser session and check that the right cities appear in order. For Timer, I can set a countdown in a different timezone, check the tab title, reload, and confirm that the timer completes. The manual check starts by matching the candidate tag and SHA in the live manifest. That’s particularly useful with a shared QA Worker, where another release can replace the build between reviews.</p>
+        <p>One shared QA Worker keeps the design manageable for a solo project. For a team testing multiple changes in parallel, I’d consider per-PR previews for early feedback and keep a dedicated candidate environment for the actual release decision.</p>
+        <h2>Approve an artifact and promote it unchanged</h2>
+        <p>Promotion requires an explicit, published RC tag. I deliberately kept automatic selection for <strong>building</strong> a candidate and explicit selection for <strong>promoting</strong> one. At build time, the latest tested commit on the intended line is a reasonable default. At promotion time, the important fact is which candidate QA reviewed.</p>
+        <p>The release plan shows the selected tag, source SHA, and checksum. With a required reviewer configured for the GitHub <code>production</code> environment, the deployment job waits at GitHub’s <strong>Review deployments</strong> step before it can use the environment’s Cloudflare credentials. The reviewer can check the plan against the QA results before approving. On a team, I’d use an independent reviewer when that fits the risk and release cadence. <a href="https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/review-deployments">GitHub deployment reviews</a></p>
+        <p>Once approved, production verifies and deploys the saved web bundle. The workflow then checks the public production URL before publishing the stable GitHub release with the same assets. The manifest still identifies the RC because the bundle hasn’t changed. The stable release notes link the two versions.</p>
+        <p>Rebuilding for production would let me inject different build-time settings. The cost is that I’d be deploying a fresh output after QA. Time And Date can use identical static assets in both environments, so I keep the differences in the deployment target and credentials. For a larger system that needs environment-specific configuration, I’d assess which settings can be applied at runtime and how to verify them separately.</p>
+        <h2>Give features, patches, and recovery the same release path</h2>
+        <p>A feature normally gets its candidate from <code>main</code>. When a version needs to stabilize while <code>main</code> moves ahead, I can cut a maintenance branch from the relevant tag and build the next RC from a tested commit on that branch. A production patch can start the same way from the last shipped tag. Both use the same build, QA, and promotion gates. I can keep release branches for as long as the version needs active maintenance.</p>
+        <p>I also included a rollback operation. It selects an existing stable release, verifies the saved artifact, goes through the production approval gate, and redeploys that artifact. Restoring a static site this way is practical because the pipeline preserves the old bundle. Systems with database migrations or stateful services need a broader recovery design, including compatibility between old code and current data.</p>
+        <p>The project has a separate manual workflow for Android debug and iOS Simulator builds. That division reflects the deployment model. A Cloudflare deploy changes what web users receive. A mobile release has its own signing, distribution, and rollout requirements. <a href="https://github.com/rahshin/timeandate/blob/main/docs/ci-cd.md">Release runbook</a> · <a href="https://github.com/rahshin/timeandate/blob/main/.github/workflows/mobile.yml">Mobile build workflow</a></p>
+        <h2>What I’d carry into another project</h2>
+        <p>On another project I’d first ask what the team needs to verify before it can release, and what it needs to find during an incident. The answer would shape the pipeline more than the choice of hosting provider. For this app, that means I can open a release, find the commit and bundle it was built from, and check whether production is serving it.</p>
+      </div>
+
+      <nav class="article-series" aria-label="Time And Date articles">
+        <h2>More in this series</h2>
+        <ul>
+          <li><a href="./timeandate-app.html">One web app, two ways to run it</a></li>
+          <li><a href="./timeandate-release-operations.html">What to do when a Time And Date release needs a second try</a></li>
+        </ul>
+        <p><a href="https://timeandate.shinde.us/">Open Time And Date</a> · <a href="https://github.com/rahshin/timeandate">View the source on GitHub</a></p>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-text">
+        © 2026 Rahul Shinde.
+      </div>
+      <div>
+        <a href="#top" class="back-to-top">↑ Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('is-active');
+      });
+    }
+  </script>
+</body>
+</html>

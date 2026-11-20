@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What to do when a Time And Date release needs a second try | Rahul Shinde</title>
+  <meta name="description" content="How to retry a release, backport a fix to an open candidate, and recover from a partial deployment." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="../index.html" class="brand-logo" aria-label="Rahul Shinde Home">
+        <img src="../images/profile-pic.jpg" alt="Rahul Shinde" class="brand-avatar" />
+        <span>Rahul Shinde</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="../about.html" class="nav-link">About</a></li>
+          <li><a href="../experience.html" class="nav-link">Experience</a></li>
+          <li><a href="./index.html" class="nav-link active">Engineering</a></li>
+          <li><a href="../privacy.html" class="nav-link">Privacy</a></li>
+          <li><a href="../ai-engineering.html" class="nav-link">AI Eng</a></li>
+          <li><a href="../ai-safety.html" class="nav-link">AI Safety</a></li>
+          <li><a href="../projects.html" class="nav-link">Projects</a></li>
+          <li><a href="../writing.html" class="nav-link">Writing</a></li>
+          <li><a href="../contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="social-nav">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          </a>
+          <a href="https://github.com/rahshin" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          </a>
+        </div>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span>Menu</span>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="./index.html" class="active">Engineering</a></li>
+        <li><a href="../privacy.html">Privacy Engineering</a></li>
+        <li><a href="../ai-engineering.html">AI Engineering</a></li>
+        <li><a href="../ai-safety.html">AI Safety & Security</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../writing.html">Writing</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="top">
+    <article class="article-container timeandate-article">
+      <header class="article-header">
+        <a href="./index.html" class="back-link">Back to Engineering Hub</a>
+        <h1 class="article-title">What to do when a Time And Date release needs a second try</h1>
+        <p class="article-deck">A failed first QA check, a worked RC backport example, and the decisions I’d make when a release stalls.</p>
+        <p class="article-meta">By Rahul Shinde · Time And Date · Release operations</p>
+      </header>
+
+      <div class="article-body">
+        <p>On the first QA deployment, the verification step reported <code>ENOTFOUND</code> after eight attempts. I wondered whether the first run needed an existing <code>build-info.json</code>. The workflow showed that the manifest is generated during the build. The error was earlier in the request: the runner couldn’t resolve the hostname to ask for the file.</p>
+        <p><code>DEPLOY_URL</code> tells verification which address to call. To use a custom hostname, I have to attach it to the QA Worker and check that it resolves. The Worker’s <code>workers.dev</code> address is another option. <a href="https://developers.cloudflare.com/workers/configuration/routing/custom-domains/">Cloudflare Custom Domains</a></p>
+        <p>The rest of this post uses worked examples and recovery procedures. The version numbers are illustrative. <a href="https://github.com/rahshin/timeandate/blob/main/docs/ci-cd.md">Time And Date release runbook</a></p>
+        <p>The pipeline builds one web bundle, deploys it to QA, and attaches it to the prerelease after automated verification. Promotion selects that prerelease and deploys the same bundle after approval. The examples assume that design. <a href="https://github.com/rahshin/timeandate/blob/main/.github/workflows/release.yml">Time And Date release workflow</a></p>
+        <h2>A QA checklist for the next candidate</h2>
+        <p>The automated smoke test fetches <code>/build-info.json</code> and checks that its candidate tag and source SHA match the bundle. It also requests both app routes and confirms they serve the app shell. It retries briefly to allow for deployment propagation. This verifies reachability, routing, and build identity. A successful HTTP response alone cannot tell me whether the JavaScript rendered correctly or whether the countdown works.</p>
+        <p>Here’s the checklist I’d use after the automated QA job passes:</p>
+        <ol>
+        <li><strong>Identify the build.</strong> Open the QA run and match the candidate and SHA against the live manifest. QA is a shared Worker, so a later candidate may have replaced the one I intended to test.</li>
+        <li><strong>Exercise World Clocks.</strong> Add, remove, and reorder cities. Open a copied link in a fresh browser session and check that it restores the same cities in the same order. Compare cities on opposite sides of midnight to verify the date as well as the time.</li>
+        <li><strong>Exercise Timer.</strong> Start a short countdown in a timezone different from the device’s. Check the display and tab title, reload to check persistence, and wait for completion. For timezone changes, also test a daylight saving transition and confirm ambiguous or nonexistent local times are handled clearly. Check a longer countdown that crosses a month boundary.</li>
+        <li><strong>Check the affected platforms.</strong> Try the changed path at desktop and phone widths and with the keyboard. If I changed shared web code used by the Capacitor apps, run the relevant native build and exercise the affected flow on a device or simulator. Browsers can throttle background tabs, so I check that the title catches up when I return.</li>
+        <li><strong>Leave evidence.</strong> Record the candidate tag, source SHA, browser or device, tested cases, and any unresolved issue in the review or release notes. Add a regression test for any defect the candidate fixes.</li>
+        </ol>
+        <p>Separate preview URLs for every PR would make parallel reviews easier. The shared QA Worker keeps this project simpler, with the tradeoff that reviewers need to verify which build is live before signing off.</p>
+        <h2>Worked release examples</h2>
+        <h3>A new feature is ready</h3>
+        <p>A normal feature follows a PR to <code>main</code>, push CI, and a candidate for the intended version. If the change belongs in the next planned release, I include it in the next candidate and test the whole bundle again. Building one RC per reviewed batch keeps QA focused. Cutting one for every commit would give faster feedback but create more artifacts and more work for a shared QA environment.</p>
+        <h3>QA finds a bug and main contains everything I want to ship</h3>
+        <p>I merge the fix into <code>main</code>, wait for push CI, and cut the next RC for the same version. If RC1 was <code>v0.2.0-rc.1</code>, RC2 is <code>v0.2.0-rc.2</code>. RC2 is a full build of the new commit, so it includes the fix and the other intended changes on <code>main</code>. I recheck the bug and the areas affected by those changes. RC1 stays intact.</p>
+        <h3>QA finds a bug after unrelated work has landed on main</h3>
+        <p>I cut <code>release/0.2</code> from the <code>v0.2.0-rc.1</code> tag. The fix is already on <code>main</code>, so I cherry-pick just the fix onto a branch based on <code>release/0.2</code> and open a PR into that release branch. If the fix relies on the new work, I adapt it to the RC code and test it there. After the PR merges and push CI passes, I run <code>candidate</code> from workflow ref <code>main</code>, enter <code>v0.2.0-rc.2</code>, and provide the tested <strong>release-branch SHA</strong>. Leaving the SHA blank would pull in the very changes I meant to leave behind.</p>
+        <p>An RC tag gives me a fixed snapshot. The maintenance branch gives me a place to keep fixing that release. Cutting the branch early gives QA a clear scope but adds backport work. Cutting it only when <code>main</code> diverges keeps routine releases light.</p>
+        <h3>A production bug needs a patch or a hotfix</h3>
+        <p>If production is on <code>v0.2.0</code> and <code>main</code> is already headed toward <code>0.3.0</code>, I start from the shipped stable tag or the matching maintenance branch. I land the smallest safe fix there, update the package version to <code>0.2.1</code> if I want automatic tag selection, and cut <code>v0.2.1-rc.1</code> from the tested SHA. Then I verify it on QA and promote it. If the fix originated on the maintenance branch, I forward-port it to <code>main</code> so the next feature release keeps the fix.</p>
+        <p>For a severe outage, a known-good rollback can restore service faster than creating a hotfix. I still need to check whether the previous build can serve current users successfully. That question gets more important if the app adds data storage, migrations, or an API later.</p>
+        <h3>A major change is coming</h3>
+        <p>I plan the version boundary in <code>package.json</code>, write release notes that cover user-visible changes, and cut a candidate through the same path. I add compatibility checks for saved links and saved timer state when a major change touches either. A version number communicates the scope of a change. It also gives QA a reason to exercise upgrades from the previous stable version.</p>
+        <h3>A dependency, credential, or mobile toolchain changes</h3>
+        <p>A dependency update goes through review, lockfile-based CI, and a candidate when it affects the web bundle. A Cloudflare token rotation is an environment change. Replace the credential, verify in QA, and confirm production still has the right account and permissions. If a credential is exposed, revoke it immediately and audit the affected deployments and release assets before resuming.</p>
+        <p>Android and iOS have a separate manual build workflow. It currently produces a debug APK and an iOS Simulator build. A signed mobile release would require its own signing credentials, QA on real devices, and store distribution. Web promotion and rollback replace static assets on Cloudflare. They cannot change an app that someone already installed. <a href="https://github.com/rahshin/timeandate/blob/main/.github/workflows/mobile.yml">Time And Date mobile workflow</a></p>
+        <h2>What I do when the pipeline fails</h2>
+        <ul>
+        <li><strong>Planning rejects a tag or source SHA.</strong> Read the reason in the plan job. A missing promotion tag, a malformed tag, an existing tag, and a source commit without successful push CI need different fixes. When the source is valid, pin the exact commit I want rather than dispatching again against a moving branch.</li>
+        <li><strong>The build or tests fail.</strong> Fix the code or toolchain, get CI green on the corrected commit, and cut a candidate. An infrastructure failure before publication can be retried with the exact same tag and source if that tag is still unused.</li>
+        <li><strong>The bundle or checksum is missing or wrong.</strong> Stop before deployment. Check that both assets came from the same trusted release. Recover the original verified pair or cut a new candidate. A checksum catches an accidental byte change. A publisher with write access could replace both files, so protecting tags and release assets matters too.</li>
+        <li><strong>Cloudflare uploads the build but smoke tests fail.</strong> DNS errors point to the hostname. HTTP errors point to the public route or access policy. A valid manifest for the wrong build points to the wrong Worker or an older active deployment. I inspect the live endpoint and Wrangler output before choosing a retry.</li>
+        <li><strong>Approval is delayed or rejected.</strong> Leave production as it is while I resolve the concern. If the candidate needs a code change, cut a new RC. Before approving an older candidate, confirm it’s still the intended version. The workflow checks the candidate type and whether the matching stable tag exists. It doesn’t automatically reject every older version. Release runs share a concurrency group, and a new pending run can replace an older pending run, so I dispatch one release at a time.</li>
+        <li><strong>Production changed but the workflow failed afterward.</strong> Check the live manifest and the GitHub release separately. A smoke failure can happen after Wrangler has already changed the live site. A publish failure can happen after smoke tests pass. In the latter case, inspect whether the stable tag, release, or assets already exist before retrying. A partial GitHub release may need reconciliation rather than another deploy.</li>
+        <li><strong>A verified release later breaks.</strong> Dispatch <code>rollback</code> with a known-good stable tag. It goes through production approval, redeploys the saved bundle, and verifies live identity. Keep the failed release for diagnosis. Follow with a patched candidate when ready.</li>
+        <li><strong>A service outage, planned retirement, or platform move changes the rules.</strong> During an outage, check what’s actually live and preserve the promoted asset and run evidence. For a planned move, verify the same bundle on the new target before switching traffic and keep a reversible DNS cutover. To retire the app, stop deployments, remove the public routes when ready, revoke credentials, and retain release records for as long as they’re useful. These are operator procedures, not automated jobs in this project.</li>
+        </ul>
+        <h2>What to verify before approving</h2>
+        <p>For production, I select a specific published QA candidate. The release plan shows its tag, source, and checksum. With the <code>production</code> environment configured for required reviewers, GitHub pauses the job and offers <strong>Review deployments → Approve and deploy</strong>. I can see what I’m approving before the deployment job gets its credentials. A solo maintainer can allow self-review. An independent reviewer gives the gate more value when another maintainer is available. <a href="https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/review-deployments">GitHub deployment reviews</a></p>
+        <p>Before approving a rerun, I’d check which build is live and whether the intended release already exists. The candidate tag and SHA in the live manifest tell me what Cloudflare is serving. The GitHub release and its assets tell me how far publication got. Those checks narrow down where to resume.</p>
+      </div>
+
+      <nav class="article-series" aria-label="Time And Date articles">
+        <h2>More in this series</h2>
+        <ul>
+          <li><a href="./timeandate-app.html">One web app, two ways to run it</a></li>
+          <li><a href="./timeandate-ci-cd.html">How I designed the Time And Date release pipeline</a></li>
+        </ul>
+        <p><a href="https://timeandate.shinde.us/">Open Time And Date</a> · <a href="https://github.com/rahshin/timeandate">View the source on GitHub</a></p>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-text">
+        © 2026 Rahul Shinde.
+      </div>
+      <div>
+        <a href="#top" class="back-to-top">↑ Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('is-active');
+      });
+    }
+  </script>
+</body>
+</html>
