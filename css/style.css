@@ -663,6 +663,10 @@ blockquote, .callout {
   box-shadow: var(--shadow-sm);
 }
 
+.timeline-item[id] {
+  scroll-margin-top: 6rem;
+}
+
 .timeline-role {
   font-size: 1.2rem;
   font-weight: 700;

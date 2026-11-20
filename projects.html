@@ -23,20 +23,15 @@
 
       <nav class="main-nav" aria-label="Main Navigation">
         <ul class="nav-list">
-          <li><a href="./index.html" class="nav-link">Home</a></li>
-          <li><a href="./about.html" class="nav-link">About</a></li>
+          <li><a href="./projects.html" class="nav-link active" aria-current="page">Work</a></li>
           <li><a href="./experience.html" class="nav-link">Experience</a></li>
-          <li><a href="./engineering/index.html" class="nav-link">Engineering</a></li>
-          <li><a href="./privacy.html" class="nav-link">Privacy</a></li>
-          <li><a href="./ai-engineering.html" class="nav-link">AI Eng</a></li>
-          <li><a href="./ai-safety.html" class="nav-link">AI Safety</a></li>
-          <li><a href="./projects.html" class="nav-link active">Projects</a></li>
           <li><a href="./writing.html" class="nav-link">Writing</a></li>
+          <li><a href="./resume.html" class="nav-link">Résumé</a></li>
           <li><a href="./contact.html" class="nav-link">Contact</a></li>
         </ul>
 
         <div class="social-nav">
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/rshinde" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
           </a>
           <a href="https://github.com/rahshin" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
@@ -52,15 +47,10 @@
 
     <div class="mobile-menu" id="mobileMenu">
       <ul>
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./about.html">About</a></li>
+        <li><a href="./projects.html" class="active" aria-current="page">Work</a></li>
         <li><a href="./experience.html">Experience</a></li>
-        <li><a href="./engineering/index.html">Engineering</a></li>
-        <li><a href="./privacy.html">Privacy Engineering</a></li>
-        <li><a href="./ai-engineering.html">AI Engineering</a></li>
-        <li><a href="./ai-safety.html">AI Safety & Security</a></li>
-        <li><a href="./projects.html" class="active">Projects</a></li>
         <li><a href="./writing.html">Writing</a></li>
+        <li><a href="./resume.html">Résumé</a></li>
         <li><a href="./contact.html">Contact</a></li>
       </ul>
     </div>
@@ -70,9 +60,17 @@
     <section class="section">
       <div class="container">
         <div class="section-header">
-          <h1 class="section-title">Selected Projects & Experiments</h1>
-          <p class="section-subtitle">A showcase of enterprise data platforms, AI-assisted engineering tools, and open-source experiments.</p>
+          <h1 class="section-title">Selected Work</h1>
+          <p class="section-subtitle">Enterprise systems I helped build and independent projects you can explore.</p>
         </div>
+
+        <p>
+          <a href="./engineering/index.html">Architecture articles</a> ·
+          <a href="./privacy.html">Privacy engineering</a> ·
+          <a href="./ai-engineering.html">AI-assisted engineering</a> ·
+          <a href="./ai-safety.html">AI safety</a> ·
+          <a href="./patent.html">Patents</a>
+        </p>
 
         <div class="grid-3">
 
@@ -92,17 +90,17 @@
             <div class="card-header">
               <span class="tag">Enterprise Platform</span>
             </div>
-            <h3 class="card-title">Enterprise Privacy Data Platform</h3>
-            <p class="card-meta">OneTrust • 1,200+ Clients</p>
+            <h3 class="card-title"><a href="./experience.html#onetrust">Enterprise Privacy Data Platform</a></h3>
+            <p class="card-meta">OneTrust · Platform served 1,200+ clients</p>
             <p class="card-body">
-              Distributed data discovery and classification platform processing 1TB+ of daily data across 40+ heterogeneous data sources (AWS S3, OneDrive, MongoDB, Cosmos DB, document OCR) on a resource-constrained 20 vCPU cluster.
+              Distributed data discovery and classification platform designed to process 1 TB per day across 40+ heterogeneous data sources (AWS S3, OneDrive, MongoDB, Cosmos DB, document OCR) on a resource-constrained 20 vCPU cluster.
             </p>
             <div class="card-footer">
               <div class="tag-group" style="margin-bottom: var(--space-xs);">
                 <span class="tag">Java</span>
                 <span class="tag">Kafka</span>
                 <span class="tag">Kubernetes</span>
-                <span class="tag">Patent WO2022159901A1</span>
+                <a class="tag" href="./patent.html">U.S. Patent 11,687,528 B2</a>
               </div>
             </div>
           </article>
@@ -112,10 +110,10 @@
             <div class="card-header">
               <span class="tag">AI Workflows</span>
             </div>
-            <h3 class="card-title">AI-Assisted DSR & Privacy Suite</h3>
-            <p class="card-meta">RelyanceAI • 60x Throughput Increase</p>
+            <h3 class="card-title"><a href="./experience.html#relyanceai">Data Subject Request Processing</a></h3>
+            <p class="card-meta">RelyanceAI · 60× processor throughput increase</p>
             <p class="card-body">
-              High-throughput Data Subject Request (DSR) workflow processor re-architected with Python microservices on GCP. Implemented HIPAA-compliant audit trails using Claude Code, the BMAD method, and React.
+              I led the processor redesign, which raised throughput from 10 requests per minute to 10 per second. I also implemented workflow audit logging with Python and React.
             </p>
             <div class="card-footer">
               <div class="tag-group" style="margin-bottom: var(--space-xs);">
@@ -144,23 +142,6 @@
                 <span class="tag">Ollama APIs</span>
                 <span class="tag">Pandas</span>
               </div>
-            </div>
-          </article>
-
-          <!-- Project 4 -->
-          <article class="card">
-            <div class="card-header">
-              <span class="tag">Open Source / Experiment</span>
-            </div>
-            <h3 class="card-title">AI Safety Evaluation Scaffold (Placeholder)</h3>
-            <p class="card-meta">GitHub Repository • Exploration</p>
-            <p class="card-body">
-              Experimental sandbox scaffold designed to log, inspect, and rate-limit autonomous LLM agent tool calls during automated red-teaming trials.
-            </p>
-            <div class="card-footer">
-              <a href="https://github.com/rahshin" target="_blank" class="btn btn-secondary" style="width: 100%;">
-                View GitHub Repo →
-              </a>
             </div>
           </article>
 
