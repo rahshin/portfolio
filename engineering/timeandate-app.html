@@ -61,15 +61,29 @@
   <main id="top">
     <article class="article-container timeandate-article">
       <header class="article-header">
-        <a href="./index.html" class="back-link">Back to Engineering Hub</a>
+        <nav class="back-link" aria-label="Breadcrumb">
+          <a href="../projects.html" id="breadcrumb-parent">Work</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Time and Date App</span>
+        </nav>
         <h1 class="article-title">One web app, two ways to run it</h1>
         <p class="article-deck">What I learned building Time And Date as a single-page application that runs in a browser and can be packaged for Android and iOS.</p>
         <p class="article-meta">By Rahul Shinde · Time And Date · App design</p>
+        <p><a href="https://timeandate.shinde.us/">Open Time And Date</a> · <a href="https://github.com/rahshin/timeandate">View the source on GitHub</a></p>
       </header>
 
       <div class="article-body">
         <p>I wanted to learn how to build a single-page app that I could also package for Android and iOS. Time And Date was my test project. I built the browser version first, then used Capacitor to put that same code in both mobile projects.</p>
-        <p>I chose two features with different storage needs. A world clock board is handy to share. A countdown is something I want to reopen later on the same device. <a href="https://github.com/rahshin/timeandate">Time And Date on GitHub</a></p>
+        <p>I chose two features with different storage needs. A world clock board is handy to share. A countdown is something I want to reopen later on the same device.</p>
+        <nav class="article-series" id="timeandate-series" aria-labelledby="timeandate-series-heading">
+          <h2 id="timeandate-series-heading">More in the Time and Date series</h2>
+          <ol>
+            <li><a href="./timeandate-ci-cd.html">How I designed the Time And Date release pipeline</a></li>
+            <li><a href="./timeandate-multi-timer.html">Time And Date CI/CD · From commit to production</a></li>
+            <li><a href="./timeandate-release-operations.html">What to do when a Time And Date release needs a second try</a></li>
+          </ol>
+        </nav>
+
         <h2>Two tools in one single-page application</h2>
         <p>World Clocks shows several cities on the same board. I can add, remove, and reorder cities, and see both the local time and date. A board can show different calendar dates at the same instant. On the web, I can share a direct link such as <code>/clocks?cities=seattle,london,tokyo</code>. Opening that link reconstructs the board in the same order.</p>
         <figure>
@@ -100,20 +114,11 @@
           <figcaption>The app on the Pixel 9a emulator (left) and iPhone 17 Pro simulator (right).</figcaption>
         </figure>
 
-        <p>A successful native build is only the first check. Touch targets, small screens, and resuming a countdown after the app has been in the background still need testing on the target platform. The browser-tab title is a web convenience. On mobile, the countdown is visible inside the app. The project supports an Android debug build and an iOS Simulator build. Signed store distribution is a separate step. <a href="https://github.com/rahshin/timeandate/blob/main/docs/mobile.md">Mobile build instructions</a></p>
+        <p>A successful native build is only the first check. Touch targets, small screens, and resuming a countdown after the app has been in the background still need testing on the target platform. The browser-tab title is a web convenience. On mobile, the countdown is visible inside the app. Test builds include an Android debug APK, a privately signed non-debug Android APK for sideloading, and an unsigned iOS Release Simulator ZIP. Store builds use separate signing and distribution. <a href="https://github.com/rahshin/timeandate/blob/main/docs/mobile.md">Mobile build instructions</a></p>
         <h2>What this project taught me</h2>
         <p>This was small enough that I could follow the whole path from browser code to a native build. I also got to make the storage decision feature by feature. I only needed to save a timer on the device and carry the city list in a link. Neither feature called for a database.</p>
         <p>That gave me a foundation for the next design question. Once I have one codebase that can run in multiple places, how do I test it, package it, and know exactly what I shipped? The <a href="./timeandate-ci-cd.html">CI/CD design article</a> describes how I approached that for the web release.</p>
       </div>
-
-      <nav class="article-series" aria-label="Time And Date articles">
-        <h2>More in this series</h2>
-        <ul>
-          <li><a href="./timeandate-ci-cd.html">How I designed the Time And Date release pipeline</a></li>
-          <li><a href="./timeandate-release-operations.html">What to do when a Time And Date release needs a second try</a></li>
-        </ul>
-        <p><a href="https://timeandate.shinde.us/">Open Time And Date</a> · <a href="https://github.com/rahshin/timeandate">View the source on GitHub</a></p>
-      </nav>
     </article>
   </main>
 
@@ -129,6 +134,12 @@
   </footer>
 
   <script>
+    if (new URLSearchParams(location.search).get('from') === 'writing') {
+      const parentLink = document.getElementById('breadcrumb-parent');
+      parentLink.href = '../writing.html';
+      parentLink.textContent = 'Writing';
+    }
+
     const navToggle = document.getElementById('navToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     if (navToggle && mobileMenu) {

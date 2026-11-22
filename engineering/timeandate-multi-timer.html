@@ -61,7 +61,7 @@
   <main id="top">
     <article class="article-container timeandate-article">
       <header class="article-header">
-        <a href="./index.html" class="back-link">Back to Engineering Hub</a>
+        <a href="./timeandate-app.html#timeandate-series" class="back-link">Back to the Time and Date series</a>
         <h1 class="article-title">Time And Date CI/CD · From commit to production</h1>
         <p class="article-deck">One repository, a standalone installable timer, and one web bundle from QA to production.</p>
         <p class="article-meta">By Rahul Shinde · Time And Date · Feature delivery</p>
@@ -99,7 +99,8 @@
           <li><strong>Verify QA.</strong> Smoke checks verify the live build identity and key URLs, including the standalone manifest and service worker for this bundle. A successful job publishes the archive and checksum as a GitHub prerelease. The resulting QA site is available for manual browser and install checks.</li>
           <li><strong>Promote the verified artifact.</strong> The <strong>promote</strong> operation downloads the selected candidate and verifies its checksum. After GitHub production approval, the workflow deploys the same archive to production, runs smoke checks, and publishes a stable release. <strong>Rollback</strong> can redeploy a prior stable archive through the same approval path.</li>
         </ol>
-        <p>The standalone mobile app is distributed through the web release. The separate, manually dispatched native workflow produces an Android debug APK and a zipped iOS Simulator build of the existing app. The release path above describes how the example moves through the pipeline. The screenshots show local preview output.</p>
+        <p>The workflow runs from <code>main</code> and can build a tested release-branch SHA with an explicit candidate tag. That makes it possible to test a targeted patch without including newer work on <code>main</code>. <a href="timeandate-release-operations.html#worked-release-examples">Worked release examples</a></p>
+        <p>The standalone mobile app is distributed through the web release. The native workflows produce Android QA builds, a signed Release APK for sideloading, and an unsigned iOS Release Simulator ZIP. The screenshots show local preview output. <a href="https://github.com/rahshin/timeandate/blob/main/docs/mobile.md">Mobile build instructions</a></p>
         <h2>FAQ</h2>
         <h3>What makes the standalone version an app?</h3>
         <p>It’s a progressive web app (PWA). Its manifest gives it a name, icon, and launch URL, so supported browsers can install it and open it from the home screen. Its entry page loads only the Multi Timer interface.</p>
@@ -112,16 +113,6 @@
         <h3>What happens if a release breaks one entry point?</h3>
         <p>Rollback restores the previous stable web bundle. If that bundle includes the standalone app, installed copies can continue serving newer cached files until the restored service worker version activates. A rollback to a release that predates the PWA removes its files from the server, and a phone may still have a cached copy.</p>
       </div>
-
-      <nav class="article-series" aria-label="Time And Date articles">
-        <h2>More in this series</h2>
-        <ul>
-          <li><a href="./timeandate-ci-cd.html">How I designed the Time And Date release pipeline</a></li>
-          <li><a href="./timeandate-app.html">One web app, two ways to run it</a></li>
-          <li><a href="./timeandate-release-operations.html">What to do when a Time And Date release needs a second try</a></li>
-        </ul>
-        <p><a href="https://timeandate.shinde.us/">Open Time And Date</a> · <a href="https://github.com/rahshin/timeandate">View the source on GitHub</a></p>
-      </nav>
     </article>
   </main>
 

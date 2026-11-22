@@ -616,6 +616,38 @@ blockquote, .callout {
   font-weight: 600;
 }
 
+/* Work and Writing filters */
+.card-filter {
+  margin-block: var(--space-lg);
+}
+
+.card-filter-status {
+  margin-top: var(--space-xs);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+[data-card-list] > .card[hidden] {
+  display: none;
+}
+
+:is(.card-filter, [data-card-list]) button.tag {
+  border: 1px solid transparent;
+  min-height: 26px;
+  font-family: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+
+:is(.card-filter, [data-card-list]) button.tag:hover {
+  border-color: currentColor;
+}
+
+:is(.card-filter, [data-card-list]) button.tag[aria-pressed="true"] {
+  background-color: var(--color-text-main);
+  color: var(--color-bg);
+}
+
 /* Timeline */
 .timeline {
   position: relative;

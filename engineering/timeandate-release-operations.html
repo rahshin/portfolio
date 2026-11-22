@@ -61,7 +61,7 @@
   <main id="top">
     <article class="article-container timeandate-article">
       <header class="article-header">
-        <a href="./index.html" class="back-link">Back to Engineering Hub</a>
+        <a href="./timeandate-app.html#timeandate-series" class="back-link">Back to the Time and Date series</a>
         <h1 class="article-title">What to do when a Time And Date release needs a second try</h1>
         <p class="article-deck">A failed first QA check, a worked RC backport example, and the decisions I’d make when a release stalls.</p>
         <p class="article-meta">By Rahul Shinde · Time And Date · Release operations</p>
@@ -83,7 +83,7 @@
         <li><strong>Leave evidence.</strong> Record the candidate tag, source SHA, browser or device, tested cases, and any unresolved issue in the review or release notes. Add a regression test for any defect the candidate fixes.</li>
         </ol>
         <p>Separate preview URLs for every PR would make parallel reviews easier. The shared QA Worker keeps this project simpler, with the tradeoff that reviewers need to verify which build is live before signing off.</p>
-        <h2>Worked release examples</h2>
+        <h2 id="worked-release-examples">Worked release examples</h2>
         <h3>A new feature is ready</h3>
         <p>A normal feature follows a PR to <code>main</code>, push CI, and a candidate for the intended version. If the change belongs in the next planned release, I include it in the next candidate and test the whole bundle again. Building one RC per reviewed batch keeps QA focused. Cutting one for every commit would give faster feedback but create more artifacts and more work for a shared QA environment.</p>
         <h3>QA finds a bug and main contains everything I want to ship</h3>
@@ -92,16 +92,19 @@
         <p>I cut <code>release/0.2</code> from the <code>v0.2.0-rc.1</code> tag. The fix is already on <code>main</code>, so I cherry-pick just the fix onto a branch based on <code>release/0.2</code> and open a PR into that release branch. If the fix relies on the new work, I adapt it to the RC code and test it there. After the PR merges and push CI passes, I run <code>candidate</code> from workflow ref <code>main</code>, enter <code>v0.2.0-rc.2</code>, and provide the tested <strong>release-branch SHA</strong>. Leaving the SHA blank would pull in the very changes I meant to leave behind.</p>
         <p>An RC tag gives me a fixed snapshot. The maintenance branch gives me a place to keep fixing that release. Cutting the branch early gives QA a clear scope but adds backport work. Cutting it only when <code>main</code> diverges keeps routine releases light.</p>
         <h3>A production bug needs a patch or a hotfix</h3>
-        <p>If production is on <code>v0.2.0</code> and <code>main</code> is already headed toward <code>0.3.0</code>, I start from the shipped stable tag or the matching maintenance branch. I land the smallest safe fix there, update the package version to <code>0.2.1</code> if I want automatic tag selection, and cut <code>v0.2.1-rc.1</code> from the tested SHA. Then I verify it on QA and promote it. If the fix originated on the maintenance branch, I forward-port it to <code>main</code> so the next feature release keeps the fix.</p>
+        <p>If production is on <code>v0.2.0</code> and <code>main</code> is already headed toward <code>0.3.0</code>, I create <code>release/0.2</code> from the shipped tag if that branch does not exist. I land the fix there, wait for push CI, and dispatch from <code>main</code> with the tested SHA and explicit tag <code>v0.2.1-rc.1</code>. I verify it on QA before promoting. If the fix originated on the maintenance branch, I forward-port it to <code>main</code>.</p>
         <p>For a severe outage, a known-good rollback can restore service faster than creating a hotfix. I still need to check whether the previous build can serve current users successfully. That question gets more important if the app adds data storage, migrations, or an API later.</p>
+        <h3>An older line needs a release after 1.0.0 ships</h3>
+        <p>Starting from <code>v0.6.0</code>, I use <code>release/0.6</code> and <code>v0.6.1-rc.1</code> for a bug fix, or <code>release/0.7</code> and <code>v0.7.0-rc.1</code> for a compatible feature. I create the branch when needed, merge the change there, and use browser tests that match that version of the app. Once push CI passes, I dispatch from <code>main</code> with the explicit candidate tag and tested SHA.</p>
+        <p>QA can serve the older candidate while production stays on <code>v1.0.0</code>. Promoting the candidate replaces the live web app on the shared production target. To restore the exact shipped <code>v0.6.0</code> bundle, I use rollback. Supporting both versions in production would require separate deployment targets.</p>
         <h3>A major change is coming</h3>
-        <p>I plan the version boundary in <code>package.json</code>, write release notes that cover user-visible changes, and cut a candidate through the same path. I add compatibility checks for saved links and saved timer state when a major change touches either. A version number communicates the scope of a change. It also gives QA a reason to exercise upgrades from the previous stable version.</p>
+        <p>I write release notes for user-visible changes and use <strong>Major release</strong> with a blank tag to start or continue the next major RC line after the latest stable release. I confirm the selected tag and source in the run summary. When a major change affects saved links or timer state, I test upgrades from the previous stable version.</p>
         <h3>A dependency, credential, or mobile toolchain changes</h3>
         <p>A dependency update goes through review, lockfile-based CI, and a candidate when it affects the web bundle. A Cloudflare token rotation is an environment change. Replace the credential, verify in QA, and confirm production still has the right account and permissions. If a credential is exposed, revoke it immediately and audit the affected deployments and release assets before resuming.</p>
-        <p>Android and iOS have a separate manual build workflow. It currently produces a debug APK and an iOS Simulator build. A signed mobile release would require its own signing credentials, QA on real devices, and store distribution. Web promotion and rollback replace static assets on Cloudflare. They cannot change an app that someone already installed. <a href="https://github.com/rahshin/timeandate/blob/main/.github/workflows/mobile.yml">Time And Date mobile workflow</a></p>
+        <p>Mobile workflows produce a debug APK, an unsigned iOS Release Simulator ZIP, and a privately signed non-debug Android APK for sideloading. Store releases use separate signing and distribution. Web promotion and rollback replace static assets on Cloudflare. An installed native app is updated through its own distribution channel. <a href="https://github.com/rahshin/timeandate/blob/main/docs/mobile.md">Mobile build instructions</a></p>
         <h2>What I do when the pipeline fails</h2>
         <ul>
-        <li><strong>Planning rejects a tag or source SHA.</strong> Read the reason in the plan job. A missing promotion tag, a malformed tag, an existing tag, and a source commit without successful push CI need different fixes. When the source is valid, pin the exact commit I want rather than dispatching again against a moving branch.</li>
+        <li><strong>Planning rejects a tag or source SHA.</strong> Check the inputs and resolved values in the run summary and read the plan job’s error. A malformed or existing tag and a source commit without successful push CI need different fixes. Pin the exact tested commit before retrying.</li>
         <li><strong>The build or tests fail.</strong> Fix the code or toolchain, get CI green on the corrected commit, and cut a candidate. An infrastructure failure before publication can be retried with the exact same tag and source if that tag is still unused.</li>
         <li><strong>The bundle or checksum is missing or wrong.</strong> Stop before deployment. Check that both assets came from the same trusted release. Recover the original verified pair or cut a new candidate. A checksum catches an accidental byte change. A publisher with write access could replace both files, so protecting tags and release assets matters too.</li>
         <li><strong>Cloudflare uploads the build but smoke tests fail.</strong> DNS errors point to the hostname. HTTP errors point to the public route or access policy. A valid manifest for the wrong build points to the wrong Worker or an older active deployment. I inspect the live endpoint and Wrangler output before choosing a retry.</li>
@@ -114,15 +117,6 @@
         <p>For production, I select a specific published QA candidate. The release plan shows its tag, source, and checksum. With the <code>production</code> environment configured for required reviewers, GitHub pauses the job and offers <strong>Review deployments → Approve and deploy</strong>. I can see what I’m approving before the deployment job gets its credentials. A solo maintainer can allow self-review. An independent reviewer gives the gate more value when another maintainer is available. <a href="https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/review-deployments">GitHub deployment reviews</a></p>
         <p>Before approving a rerun, I’d check which build is live and whether the intended release already exists. The candidate tag and SHA in the live manifest tell me what Cloudflare is serving. The GitHub release and its assets tell me how far publication got. Those checks narrow down where to resume.</p>
       </div>
-
-      <nav class="article-series" aria-label="Time And Date articles">
-        <h2>More in this series</h2>
-        <ul>
-          <li><a href="./timeandate-app.html">One web app, two ways to run it</a></li>
-          <li><a href="./timeandate-ci-cd.html">How I designed the Time And Date release pipeline</a></li>
-        </ul>
-        <p><a href="https://timeandate.shinde.us/">Open Time And Date</a> · <a href="https://github.com/rahshin/timeandate">View the source on GitHub</a></p>
-      </nav>
     </article>
   </main>
 

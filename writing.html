@@ -64,7 +64,18 @@
           <p class="section-subtitle">Architectural decision records, essays on privacy engineering, and technical leadership reflections.</p>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+        <div class="card-filter" data-card-filter="article" hidden>
+          <div class="tag-group" role="group" aria-label="Filter articles by topic">
+            <button type="button" class="tag" data-tag="" aria-pressed="true">All</button>
+            <button type="button" class="tag" data-tag="ci-cd" aria-pressed="false">CI/CD</button>
+            <button type="button" class="tag" data-tag="architecture" aria-pressed="false">Architecture</button>
+            <button type="button" class="tag" data-tag="ai-engineering" aria-pressed="false">AI Engineering</button>
+            <button type="button" class="tag" data-tag="engineering-leadership" aria-pressed="false">Engineering Leadership</button>
+          </div>
+          <p class="card-filter-status" role="status"></p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-lg);" data-card-list>
 
           <article class="card">
             <div class="card-header">
@@ -73,6 +84,13 @@
             </div>
             <h3 class="card-title"><a href="./engineering/timeandate-multi-timer.html">Time And Date CI/CD · From commit to production</a></h3>
             <p class="card-body">How shared code supports the website and an installable timer, and how one verified bundle moves from QA to production.</p>
+            <div class="tag-group">
+              <span class="tag" data-tag="ci-cd">CI/CD</span>
+              <span class="tag" data-tag="pwa">PWA</span>
+              <span class="tag" data-tag="vite">Vite</span>
+              <span class="tag" data-tag="capacitor">Capacitor</span>
+              <span class="tag" data-tag="github-actions">GitHub Actions</span>
+            </div>
           </article>
 
           <article class="card">
@@ -82,6 +100,12 @@
             </div>
             <h3 class="card-title"><a href="./engineering/timeandate-ci-cd.html">How I designed the Time And Date release pipeline</a></h3>
             <p class="card-body">How I pinned the source commit, verified the QA bundle, and promoted those same files to production.</p>
+            <div class="tag-group">
+              <span class="tag" data-tag="ci-cd">CI/CD</span>
+              <span class="tag" data-tag="release-engineering">Release Engineering</span>
+              <span class="tag" data-tag="github-actions">GitHub Actions</span>
+              <span class="tag" data-tag="cloudflare-workers">Cloudflare Workers</span>
+            </div>
           </article>
 
           <article class="card">
@@ -89,8 +113,15 @@
               <span class="tag">App design</span>
               <span class="card-meta">Time And Date</span>
             </div>
-            <h3 class="card-title"><a href="./engineering/timeandate-app.html">One web app, two ways to run it</a></h3>
+            <h3 class="card-title"><a href="./engineering/timeandate-app.html?from=writing">One web app, two ways to run it</a></h3>
             <p class="card-body">A local-first web app that packages the same code for Android and iOS.</p>
+            <div class="tag-group">
+              <span class="tag" data-tag="architecture">Architecture</span>
+              <span class="tag" data-tag="web-mobile">Web &amp; Mobile</span>
+              <span class="tag" data-tag="spa">SPA</span>
+              <span class="tag" data-tag="capacitor">Capacitor</span>
+              <span class="tag" data-tag="local-storage">Local Storage</span>
+            </div>
           </article>
 
           <article class="card">
@@ -100,6 +131,11 @@
             </div>
             <h3 class="card-title"><a href="./engineering/timeandate-release-operations.html">What to do when a Time And Date release needs a second try</a></h3>
             <p class="card-body">How to retry a release, backport a fix to an open candidate, and recover from a partial deployment.</p>
+            <div class="tag-group">
+              <span class="tag" data-tag="ci-cd">CI/CD</span>
+              <span class="tag" data-tag="release-operations">Release Operations</span>
+              <span class="tag" data-tag="github-actions">GitHub Actions</span>
+            </div>
           </article>
 
           <!-- Article Card 1 -->
@@ -114,6 +150,11 @@
             <p class="card-body">
               Field-level tokenization, Elasticsearch-backed PII hashing with user-specific keys, and cryptographic erasure to meet GDPR Article 17 obligations across immutable data lakes.
             </p>
+            <div class="tag-group">
+              <span class="tag" data-tag="architecture">Architecture</span>
+              <span class="tag" data-tag="privacy">Privacy</span>
+              <span class="tag" data-tag="distributed-systems">Distributed Systems</span>
+            </div>
           </article>
 
           <!-- Article Card 2 -->
@@ -128,12 +169,17 @@
             <p class="card-body">
               Lessons learned from scaling OneTrust's stream processing platform to 1TB/day on resource-constrained 20 vCPU clusters using Kafka, bounded worker pools, and deduplication keys.
             </p>
+            <div class="tag-group">
+              <span class="tag" data-tag="architecture">Architecture</span>
+              <span class="tag" data-tag="data-engineering">Data Engineering</span>
+              <span class="tag" data-tag="kafka">Kafka</span>
+            </div>
           </article>
 
           <!-- Article Card 3 -->
           <article class="card">
             <div class="card-header">
-              <span class="tag">AI Engineering</span>
+              <span class="tag" data-tag="ai-engineering">AI Engineering</span>
               <span class="card-meta">Reflection • 7 min read</span>
             </div>
             <h3 class="card-title">
@@ -142,12 +188,17 @@
             <p class="card-body">
               How to adopt agentic coding assistants and the BMAD methodology to accelerate feature delivery without degrading code review quality, static analysis standards, or unit test rigor.
             </p>
+            <div class="tag-group">
+              <span class="tag" data-tag="claude-code">Claude Code</span>
+              <span class="tag" data-tag="bmad">BMAD</span>
+              <span class="tag" data-tag="code-quality">Code Quality</span>
+            </div>
           </article>
 
           <!-- Article Card 4 -->
           <article class="card">
             <div class="card-header">
-              <span class="tag">Engineering Leadership</span>
+              <span class="tag" data-tag="engineering-leadership">Engineering Leadership</span>
               <span class="card-meta">Playbook • 5 min read</span>
             </div>
             <h3 class="card-title">
@@ -156,6 +207,9 @@
             <p class="card-body">
               Operational playbook for breaking down monolithic deployment risks, introducing automated CI/CD checks, and building high team morale through organizational transitions.
             </p>
+            <div class="tag-group">
+              <span class="tag" data-tag="ci-cd">CI/CD</span>
+            </div>
           </article>
 
         </div>
@@ -183,5 +237,6 @@
       });
     }
   </script>
+  <script src="./js/card-filter.js" defer></script>
 </body>
 </html>

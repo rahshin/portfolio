@@ -65,14 +65,24 @@
         </div>
 
         <p>
-          <a href="./engineering/index.html">Architecture articles</a> ·
           <a href="./privacy.html">Privacy engineering</a> ·
           <a href="./ai-engineering.html">AI-assisted engineering</a> ·
           <a href="./ai-safety.html">AI safety</a> ·
           <a href="./patent.html">Patents</a>
         </p>
 
-        <div class="grid-3">
+        <div class="card-filter" data-card-filter="project" hidden>
+          <div class="tag-group" role="group" aria-label="Filter projects by topic">
+            <button type="button" class="tag" data-tag="" aria-pressed="true">All</button>
+            <button type="button" class="tag" data-tag="privacy-governance" aria-pressed="false">Privacy &amp; Governance</button>
+            <button type="button" class="tag" data-tag="data-engineering" aria-pressed="false">Data Engineering</button>
+            <button type="button" class="tag" data-tag="ai-engineering" aria-pressed="false">AI Engineering</button>
+            <button type="button" class="tag" data-tag="web-mobile" aria-pressed="false">Web &amp; Mobile</button>
+          </div>
+          <p class="card-filter-status" role="status"></p>
+        </div>
+
+        <div class="grid-3" data-card-list>
 
           <article class="card">
             <div class="card-header">
@@ -85,9 +95,11 @@
             </p>
             <div class="card-footer">
               <div class="tag-group" style="margin-bottom: var(--space-xs);">
-                <span class="tag">Java</span>
-                <span class="tag">Kafka</span>
-                <span class="tag">Kubernetes</span>
+                <span class="tag" data-tag="privacy-governance">Privacy &amp; Governance</span>
+                <span class="tag" data-tag="data-engineering">Data Engineering</span>
+                <span class="tag" data-tag="java">Java</span>
+                <span class="tag" data-tag="kafka">Kafka</span>
+                <span class="tag" data-tag="kubernetes">Kubernetes</span>
                 <a class="tag" href="./patent.html">U.S. Patent 11,687,528 B2</a>
               </div>
             </div>
@@ -104,11 +116,13 @@
             </p>
             <div class="card-footer">
               <div class="tag-group" style="margin-bottom: var(--space-xs);">
-                <span class="tag">Claude Code</span>
-                <span class="tag">BMAD</span>
-                <span class="tag">Python</span>
-                <span class="tag">React</span>
-                <span class="tag">GCP</span>
+                <span class="tag" data-tag="privacy-governance">Privacy &amp; Governance</span>
+                <span class="tag" data-tag="ai-engineering">AI Engineering</span>
+                <span class="tag" data-tag="claude-code">Claude Code</span>
+                <span class="tag" data-tag="bmad">BMAD</span>
+                <span class="tag" data-tag="python">Python</span>
+                <span class="tag" data-tag="react">React</span>
+                <span class="tag" data-tag="gcp">GCP</span>
               </div>
             </div>
           </article>
@@ -124,9 +138,12 @@
             </p>
             <div class="card-footer">
               <div class="tag-group" style="margin-bottom: var(--space-xs);">
-                <span class="tag">Python</span>
-                <span class="tag">Ollama APIs</span>
-                <span class="tag">Pandas</span>
+                <span class="tag" data-tag="privacy-governance">Privacy &amp; Governance</span>
+                <span class="tag" data-tag="data-engineering">Data Engineering</span>
+                <span class="tag" data-tag="ai-engineering">AI Engineering</span>
+                <span class="tag" data-tag="python">Python</span>
+                <span class="tag" data-tag="ollama-apis">Ollama APIs</span>
+                <span class="tag" data-tag="pandas">Pandas</span>
               </div>
             </div>
           </article>
@@ -135,11 +152,14 @@
             <div class="card-header"><span class="tag">Web and Mobile</span></div>
             <h3 class="card-title"><a href="./engineering/timeandate-app.html">Time and Date App</a></h3>
             <p class="card-body">World Clocks and Timer run in the browser and share a codebase with Android and iOS builds. The project also demonstrates how to promote a QA-tested bundle through GitHub Actions and Cloudflare.</p>
-            <div class="card-footer">
-              <a href="https://timeandate.shinde.us/">Open the app</a> ·
-              <a href="./engineering/timeandate-multi-timer.html">Read the Multi Timer case study</a> ·
-              <a href="./engineering/timeandate-ci-cd.html">Read the CI/CD case study</a> ·
-              <a href="https://github.com/rahshin/timeandate">View the source</a>
+            <div class="tag-group">
+              <span class="tag" data-tag="web-mobile">Web &amp; Mobile</span>
+              <span class="tag" data-tag="ci-cd">CI/CD</span>
+              <span class="tag" data-tag="spa">SPA</span>
+              <span class="tag" data-tag="pwa">PWA</span>
+              <span class="tag" data-tag="vite">Vite</span>
+              <span class="tag" data-tag="capacitor">Capacitor</span>
+              <span class="tag" data-tag="github-actions">GitHub Actions</span>
             </div>
           </article>
 
@@ -149,9 +169,12 @@
             <p class="card-body">A small catalog with a local visual editor for descriptions and product photos. GitHub versions the content and images, and Cloudflare Pages builds and serves the public site.</p>
             <div class="card-footer">
               <div class="tag-group">
-                <span class="tag">React</span>
-                <span class="tag">Local CMS</span>
-                <span class="tag">Cloudflare Pages</span>
+                <span class="tag" data-tag="web-mobile">Web &amp; Mobile</span>
+                <span class="tag" data-tag="spa">SPA</span>
+                <span class="tag" data-tag="vite">Vite</span>
+                <span class="tag" data-tag="react">React</span>
+                <span class="tag" data-tag="local-cms">Local CMS</span>
+                <span class="tag" data-tag="cloudflare-pages">Cloudflare Pages</span>
               </div>
             </div>
           </article>
@@ -167,10 +190,12 @@
             </p>
             <div class="card-footer">
               <div class="tag-group" style="margin-bottom: var(--space-xs);">
-                <span class="tag">Java</span>
-                <span class="tag">Tomcat</span>
-                <span class="tag">RabbitMQ</span>
-                <span class="tag">MySQL</span>
+                <span class="tag" data-tag="web-mobile">Web &amp; Mobile</span>
+                <span class="tag" data-tag="enterprise-platforms">Enterprise Platforms</span>
+                <span class="tag" data-tag="java">Java</span>
+                <span class="tag" data-tag="tomcat">Tomcat</span>
+                <span class="tag" data-tag="rabbitmq">RabbitMQ</span>
+                <span class="tag" data-tag="mysql">MySQL</span>
               </div>
             </div>
           </article>
@@ -199,5 +224,6 @@
       });
     }
   </script>
+  <script src="./js/card-filter.js" defer></script>
 </body>
 </html>

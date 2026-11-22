@@ -61,7 +61,7 @@
   <main id="top">
     <article class="article-container timeandate-article">
       <header class="article-header">
-        <a href="./index.html" class="back-link">Back to Engineering Hub</a>
+        <a href="./timeandate-app.html#timeandate-series" class="back-link">Back to the Time and Date series</a>
         <h1 class="article-title">How I designed the Time And Date release pipeline</h1>
         <p class="article-deck">A GitHub Actions and Cloudflare case study in building once and deploying the bundle QA tested.</p>
         <p class="article-meta">By Rahul Shinde · Time And Date · CI/CD design</p>
@@ -80,7 +80,7 @@
         <p>I chose to verify the actual release SHA against a successful <strong>push</strong> CI run. The commit that lands after a merge can differ from the revision that passed PR checks. The release planner verifies the SHA it will build, and it requires that the commit be reachable from <code>main</code> or a maintained release branch. Branch rules can make the CI check a merge requirement. The release check then applies that same standard to the exact source selected for deployment. <a href="https://github.com/rahshin/timeandate/blob/main/.github/workflows/ci.yml">CI workflow</a></p>
         <h2>What goes into the release bundle</h2>
         <p>The release workflow runs from <code>main</code>. Its source can come from <code>main</code> or a release branch. That separation lets me use the current release workflow to build a specific, older maintenance commit when needed.</p>
-        <p>For a routine candidate I leave the source SHA and tag blank. The workflow pins the <code>main</code> commit at dispatch and uses that commit’s <code>package.json</code> version to choose the next RC tag. For example, version <code>0.2.0</code> starts at <code>v0.2.0-rc.1</code>. When I need a particular release branch commit, I can supply its full SHA. I can also specify a candidate tag explicitly.</p>
+        <p>For a routine candidate, I can leave the source SHA and tag blank. The workflow pins the <code>main</code> commit at dispatch and continues an eligible RC line from its history when one exists. Otherwise it selects a version using the package and stable tags. The <strong>Major release</strong> option starts or continues the next major line when the tag is blank. The run summary records the requested inputs, selected tag, and exact source SHA.</p>
         <p>The build produces a static bundle and two forms of evidence:</p>
         <ul>
         <li><strong>A SHA-256 checksum</strong> lets the workflow verify that the archived bundle’s bytes match the expected digest.</li>
@@ -93,27 +93,17 @@
         <p>A browser check covers what those requests miss. For example, with World Clocks, I can open a shared board in a fresh browser session and check that the right cities appear in order. For Timer, I can set a countdown in a different timezone, check the tab title, reload, and confirm that the timer completes. The manual check starts by matching the candidate tag and SHA in the live manifest. That’s particularly useful with a shared QA Worker, where another release can replace the build between reviews.</p>
         <p>One shared QA Worker keeps the design manageable for a solo project. For a team testing multiple changes in parallel, I’d consider per-PR previews for early feedback and keep a dedicated candidate environment for the actual release decision.</p>
         <h2>Approve an artifact and promote it unchanged</h2>
-        <p>Promotion requires an explicit, published RC tag. I deliberately kept automatic selection for <strong>building</strong> a candidate and explicit selection for <strong>promoting</strong> one. At build time, the latest tested commit on the intended line is a reasonable default. At promotion time, the important fact is which candidate QA reviewed.</p>
+        <p>Promotion can select the highest eligible published RC when the tag is blank. I enter an explicit tag when promoting a specific QA-tested bundle so the workflow selects the candidate I reviewed.</p>
         <p>The release plan shows the selected tag, source SHA, and checksum. With a required reviewer configured for the GitHub <code>production</code> environment, the deployment job waits at GitHub’s <strong>Review deployments</strong> step before it can use the environment’s Cloudflare credentials. The reviewer can check the plan against the QA results before approving. On a team, I’d use an independent reviewer when that fits the risk and release cadence. <a href="https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/review-deployments">GitHub deployment reviews</a></p>
         <p>Once approved, production verifies and deploys the saved web bundle. The workflow then checks the public production URL before publishing the stable GitHub release with the same assets. The manifest still identifies the RC because the bundle hasn’t changed. The stable release notes link the two versions.</p>
         <p>Rebuilding for production would let me inject different build-time settings. The cost is that I’d be deploying a fresh output after QA. Time And Date can use identical static assets in both environments, so I keep the differences in the deployment target and credentials. For a larger system that needs environment-specific configuration, I’d assess which settings can be applied at runtime and how to verify them separately.</p>
         <h2>Give features, patches, and recovery the same release path</h2>
-        <p>A feature normally gets its candidate from <code>main</code>. When a version needs to stabilize while <code>main</code> moves ahead, I can cut a maintenance branch from the relevant tag and build the next RC from a tested commit on that branch. A production patch can start the same way from the last shipped tag. Both use the same build, QA, and promotion gates. I can keep release branches for as long as the version needs active maintenance.</p>
+        <p>A feature normally gets its candidate from <code>main</code>. When QA needs a targeted fix after <code>main</code> moves ahead, I create a release branch from the candidate tag. A patch to a shipped version starts from its stable tag. In either case, I wait for push CI and dispatch from <code>main</code> with the tested release-branch SHA and an explicit RC tag. <a href="timeandate-release-operations.html#worked-release-examples">Worked release examples</a></p>
         <p>I also included a rollback operation. It selects an existing stable release, verifies the saved artifact, goes through the production approval gate, and redeploys that artifact. Restoring a static site this way is practical because the pipeline preserves the old bundle. Systems with database migrations or stateful services need a broader recovery design, including compatibility between old code and current data.</p>
-        <p>The project has a separate manual workflow for Android debug and iOS Simulator builds. That division reflects the deployment model. A Cloudflare deploy changes what web users receive. A mobile release has its own signing, distribution, and rollout requirements. <a href="https://github.com/rahshin/timeandate/blob/main/docs/ci-cd.md">Release runbook</a> · <a href="https://github.com/rahshin/timeandate/blob/main/.github/workflows/mobile.yml">Mobile build workflow</a></p>
+        <p>Mobile QA builds include a debug APK and an unsigned iOS Release Simulator ZIP. A separate workflow signs a non-debug Android APK for sideloading. Store distribution uses its own signing and rollout process. A Cloudflare deploy changes what web users receive. <a href="https://github.com/rahshin/timeandate/blob/main/docs/ci-cd.md">Release runbook</a> · <a href="https://github.com/rahshin/timeandate/blob/main/docs/mobile.md">Mobile build instructions</a></p>
         <h2>What I’d carry into another project</h2>
         <p>On another project I’d first ask what the team needs to verify before it can release, and what it needs to find during an incident. The answer would shape the pipeline more than the choice of hosting provider. For this app, that means I can open a release, find the commit and bundle it was built from, and check whether production is serving it.</p>
       </div>
-
-      <nav class="article-series" aria-label="Time And Date articles">
-        <h2>More in this series</h2>
-        <ul>
-          <li><a href="./timeandate-multi-timer.html">Time And Date CI/CD · From commit to production</a></li>
-          <li><a href="./timeandate-app.html">One web app, two ways to run it</a></li>
-          <li><a href="./timeandate-release-operations.html">What to do when a Time And Date release needs a second try</a></li>
-        </ul>
-        <p><a href="https://timeandate.shinde.us/">Open Time And Date</a> · <a href="https://github.com/rahshin/timeandate">View the source on GitHub</a></p>
-      </nav>
     </article>
   </main>
 
